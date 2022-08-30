@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import UserProfile from "./pages/UserProfile";
 
 /** **************************** Import Pages ****************************** */
@@ -49,7 +49,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/user-profile" element={<UserProfile />} />
+              {localStorage.getItem("loggedUser") ? (
+                <Route path="/user-profile" element={<UserProfile />} />
+              ) : (
+                <Route
+                  path="/user-profile"
+                  element={<Navigate replace to="/" />}
+                />
+              )}
               <Route path="/*" element={<hl className="">Not Found</hl>} />
             </Routes>
           </div>

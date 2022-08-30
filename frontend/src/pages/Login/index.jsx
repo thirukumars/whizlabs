@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { LoginUser } from "../../redux/actions";
 
@@ -7,6 +8,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,9 +16,8 @@ const Login = () => {
   };
   const onSumbit = (e) => {
     e.preventDefault();
-    LoginUser(form)
-      .then((res) => console.log(res, "res........"))
-      .catch((err) => console.log(err, "....."));
+    dispatch(LoginUser(form));
+    // .then((res) => console.log(res, "di"));
     console.log(form, "fo.");
   };
   return (
